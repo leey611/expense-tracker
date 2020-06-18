@@ -1,0 +1,96 @@
+<div class="container d-flex flex-column flex-nowrap align-items-center mt-4">
+  <h3>Please Update Your Record</h3>
+  <h6 class="align-self-start ml-5"><span style="color: red;">*</span>Required</h6>
+  {{!-- 表單 --}}
+  <form action="/records/{{_id}}/edit?_method=put" method="post"
+    class="d-flex flex-column flex-nowrap align-items-start">
+    <div class="form-group mt-4">
+      <div class="row">
+        <div class="col-auto d-flex align-items-center">
+          <label for="isExpense" class="m-0">Type<span style="color: red;">*</span> :</label>
+        </div>
+        <div class="col-auto">
+          <div class="input-group">
+            <select class="form-control" id="recordCategory" name="isExpense" required>
+              {{#if isExpense}}
+              <option value="Expense">Expense</option>
+              <option value="Income">Income</option>
+              {{else}}
+              <option value="Income">Income</option>
+              <option value="Expense">Expense</option>
+              {{/if}}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-4">
+      <div class="row">
+        <div class="col-auto d-flex align-items-center">
+          <label for="merchantName" class="m-0">Merchant<span style="color: red;">*</span> :</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" name="merchant" id="merchantName" placeholder="Merchant Name" class="form-control"
+            value="{{merchant}}" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-4">
+      <div class="row">
+        <div class="col-auto d-flex align-items-center">
+          <label for="recordName" class="m-0">Name<span style="color: red;">*</span> :</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" name="name" id="recordName" placeholder="Record Name" value="{{name}}" class="form-control"
+            required>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-4">
+      <div class="row">
+        <div class="col-auto d-flex align-items-center">
+          <label for="recordDate" class="m-0">Date<span style="color: red;">*</span> :</label>
+        </div>
+        <div class="col-auto">
+          <input type="date" name="date" id="recordDate" class="form-control" value="{{date}}" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-4">
+      <div class="row">
+        <div class="col-auto d-flex align-items-center">
+          <label for="recordCategory" class="m-0">Category<span style="color: red;">*</span> :</label>
+        </div>
+        <div class="col-auto">
+          <div class="input-group">
+            <select class="form-control" id="recordCategory" name="category" required>
+              <option value="{{category}}">{{category}}</option>
+              {{#each otherCategories}}
+              <option value="{{this}}">{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-4">
+      <div class="row">
+        <div class="col-auto d-flex align-items-center">
+          <label for="recordAmount" class="m-0">Amount<span style="color: red;">*</span> :</label>
+        </div>
+        <div class="col-auto">
+          <input type="number" name="amount" id="recordAmount" class="form-control" min="0" step="1" value="{{amount}}"
+            required>
+        </div>
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-outline-primary btn-block rounded-pill align-self-center mt-3">Update</button>
+  </form>
+</div>

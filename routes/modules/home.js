@@ -34,13 +34,16 @@ router.get('/', (req, res) => {
     .catch((err) => console.log(err));
 });
 
+// Filter the records according to categories or months
 router.get('/filter', (req, res) => {
   let totalExpense = 0;
   let totalIncome = 0;
   let balanceAmount;
+  // if either category or months isn't selected, redirect to home
   if (!req.query.category && !req.query.month) {
     return res.redirect('/');
   }
+  // if both category and months are selected, find by the category and then filter by the month
   if (req.query.category && req.query.month) {
     Record.find({ category: req.query.category })
       .sort('_id')
@@ -48,7 +51,6 @@ router.get('/filter', (req, res) => {
       .then((records) => {
         const filteredRecords = records.filter((record) => {
           const recordMonth = new Date(record.date).getMonth() + 1;
-
           return recordMonth === Number(req.query.month);
         });
         filteredRecords.map(
@@ -72,6 +74,8 @@ router.get('/filter', (req, res) => {
       })
       .catch((err) => console.log(err));
   }
+
+  //if only category is selected (no months), find by the category
   if (!req.query.month) {
     Record.find({ category: req.query.category })
       .sort('_id')
@@ -97,6 +101,8 @@ router.get('/filter', (req, res) => {
       })
       .catch((err) => console.log(err));
   }
+
+  // if only months is selected, find all first and then filter with the month
   if (!req.query.category) {
     Record.find()
       .sort('_id')

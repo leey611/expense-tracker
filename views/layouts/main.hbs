@@ -11,9 +11,19 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg bg-warning">
     <div class="container">
-      <a href="/" class="navbar-brand">Expense Tracker</a>
+      <a href="/" class="navbar-brand text-white">Expense Tracker</a>
+      {{#if isAuthenticated}}
+      <a href="/users/logout" class="btn btn-light" style="border: none;  ">Logout</a>
+      {{else}}
+      <div>
+        <a href="/users/login" class="btn btn-light" style="border: none;  ">Login</a>
+        <a href="/users/register" class="btn btn-light" style="border: none;  ">Sign up</a>
+      </div>
+      {{/if}}
+
+
     </div>
   </nav>
   {{{ body }}}

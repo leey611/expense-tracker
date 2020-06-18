@@ -41,15 +41,16 @@ router.get('/filter', (req, res) => {
   if (!req.query.category && !req.query.month) {
     return res.redirect('/');
   }
-  if (!req.query.month) {
-    Record.find()
+  if (req.query.category && req.query.month) {
+    Record.find({ category: req.query.category })
       .sort('_id')
       .lean()
       .then((records) => {
-        const filteredRecords = records.filter(
-          (record) => record.category === req.query.category
-        );
+        const filteredRecords = records.filter((record) => {
+          const recordMonth = new Date(record.date).getMonth() + 1;
 
+          return recordMonth === Number(req.query.month);
+        });
         filteredRecords.map(
           (record) => (totalExpense += record.isExpense && record.amount)
         );
@@ -59,8 +60,34 @@ router.get('/filter', (req, res) => {
         );
         //balance
         balanceAmount = totalIncome - totalExpense;
+
         return res.render('home', {
           records: filteredRecords,
+          totalExpense,
+          totalIncome,
+          balanceAmount,
+          categories,
+          months
+        });
+      })
+      .catch((err) => console.log(err));
+  }
+  if (!req.query.month) {
+    Record.find({ category: req.query.category })
+      .sort('_id')
+      .lean()
+      .then((records) => {
+        records.map(
+          (record) => (totalExpense += record.isExpense && record.amount)
+        );
+        //map through all the income and add them together
+        records.map(
+          (record) => (totalIncome += !record.isExpense && record.amount)
+        );
+        //balance
+        balanceAmount = totalIncome - totalExpense;
+        return res.render('home', {
+          records,
           totalExpense,
           totalIncome,
           balanceAmount,

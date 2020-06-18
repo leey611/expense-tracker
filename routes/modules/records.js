@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Record = require('../../models/record');
-const categories = ['Home', 'Transport', 'Entertainment', 'food', 'others'];
+const categories = ['Home', 'Transport', 'Entertainment', 'Food', 'Others'];
 
 //enter the create new record page
 router.get('/new', (req, res) => {

@@ -1,7 +1,8 @@
-<div class="container d-flex flex-nowrap flex-column align-items-center mt-4">
+<div class="container d-flex flex-nowrap flex-column align-items-center mt-3">
   {{!-- 篩選類別Filter --}}
-  <form action="/filter" method="GET" class="form-inline mb-3">
-    <div class="input-group d-flex flex-nowrap mr-3 mb-2 mb-sm-0">
+
+  <form action="/filter" method="GET" class="form-inline mb-2 flex-column flex-md-row align-items-around">
+    <div class="input-group d-flex flex-nowrap mr-sm-3 mb-2 mb-sm-0">
       <div class="input-group-prepend">
         <label class="input-group-text" for="inputGroupSelect01">Category</label>
       </div>
@@ -13,7 +14,7 @@
         {{/each}}
       </select>
     </div>
-    <div class="input-group d-flex flex-nowrap">
+    <div class="input-group d-flex flex-nowrap mb-2 mb-sm-0">
       <div class="input-group-prepend">
         <label class="input-group-text" for="inputGroupSelect02">Month</label>
       </div>
@@ -32,32 +33,77 @@
 
   </form>
 
+  <div style="width: 600px; max-width: 100%;">
+    <canvas id="myChart"></canvas>
+  </div>
   {{!-- 總金額totalAmount  --}}
-  <div class="d-flex flex justify-content-center align-items-center flex-wrap mt-2">
+  <div class="d-flex justify-content-around mt-3" style="width: 100%;">
     <div>
-      <h3 class="text-center">Balance</h3>
-      <span class="badge badge-pill badge-primary px-5 py-2">
-        <h2 class="p-0 m-0">$ {{balanceAmount}}</h2>
-      </span>
+      <div class="text-center">Balance</div>
+      <div style="font-size: 28px; font-weight: 600;"><span>$ </span><span id="balanceAmount">{{balanceAmount}}</span>
+      </div>
     </div>
 
-    <div class="ml-2 mr-2">
-      <h3 class="text-center">Expense</h3>
-      <span class="badge badge-pill badge-primary px-5 py-2">
-        <h2 class="p-0 m-0">$ {{totalExpense}}</h2>
-      </span>
+    <div class="ml-3 mr-3">
+      <div class="text-center">Expense</div>
+      <div style="font-size: 28px; font-weight: 600;"><span>$ </span><span id="totalExpense">{{totalExpense}}</span>
+      </div>
     </div>
 
     <div>
-      <h3 class="text-center">Income</h3>
-      <span class="badge badge-pill badge-primary px-5 py-2">
-        <h2 class="p-0 m-0">$ {{totalIncome}}</h2>
-      </span>
+      <div class="text-center">Income</div>
+      <div style="font-size: 28px; font-weight: 600;"><span>$ </span><span id="totalIncome">{{totalIncome}}</span>
+      </div>
+
     </div>
 
   </div>
 
   {{!-- 花費細項Detail --}}
+
+
+  <div class="container mt-2" style="width: 950px; max-width: 100%; overflow: scroll">
+    {{#each records}}
+    <div class="row">
+      {{#if this.isExpense}}
+      <div class="col-1">EX</div>
+      {{else}}
+      <div class="col-1">IN</div>
+      {{/if}}
+      <div class="col-1 categoryIcon">
+        {{this.category}}
+      </div>
+      <div class="col-5">
+        <div>{{this.name}}</div>
+        <div>{{this.date}}</div>
+      </div>
+      <div class="col text-right">{{#if this.isExpense }}<span>-</span>{{/if}}${{this.amount}}</div>
+      <div class="col">
+        <div class="d-flex flex-nowrap justify-content-center">
+          <a class="link mr-2" href="/records/{{this._id}}/edit"><i class="far fa-edit" id="edit-icon"
+              style="font-size: 1.5rem;"></i>
+          </a>
+          <form action="/records/{{this._id}}?_method=DELETE" method="post">
+            <button type="submit" class="btn btn-link m-0 p-0" style="border: none; text-decoration:none">
+              <i class="far fa-trash-alt" id="delete-icon" style="font-size: 1.5rem;">
+              </i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+
+
+  </div>
+  <div class="mt-3">
+    <form class="align-self-baseline" action="/records/new" method="GET">
+      <button type="submit" class="btn btn-outline-warning" style="width: 200px;">Add</button>
+    </form>
+  </div>
+
+  {{!-- 
   <table class="table table-hover mt-3">
     <thead>
       <tr>
@@ -110,5 +156,10 @@
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> --}}
 </div>
+
+<script src="/javascripts/icon.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="/javascripts/graph.js"></script>
+{{!-- <script src="/javascripts/graph.js"></script> --}}

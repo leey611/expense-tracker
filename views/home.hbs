@@ -103,60 +103,7 @@
     </form>
   </div>
 
-  {{!-- 
-  <table class="table table-hover mt-3">
-    <thead>
-      <tr>
-        <th style="text-align: center;" scope="col">Type</th>
-        <th style="text-align: center;" scope="col">Category</th>
-        <th style="text-align: center;" scope="col">Merchant</th>
-        <th style="text-align: center;" scope="col">Name</th>
-        <th style="text-align: center;" scope="col">Time</th>
-        <th style="text-align: center;" scope="col">Amount</th>
-        <th style="text-align: center;" scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each records}}
-      <tr>
-        {{#if this.isExpense}}
-        <td style="text-align: center;">Expense</td>
-        {{else}}
-        <td style="text-align: center;">Income</td>
-        {{/if}}
 
-        <td style="text-align: center;" scope="row">{{{this.category}}}</td>
-        <td style="text-align: center;">{{this.merchant}}</td>
-        <td style="text-align: center;">{{this.name}}</td>
-        <td style="text-align: center;">{{this.date}}</td>
-
-        <td style="text-align: center;">
-          {{#if this.isExpense }}<span>-</span>{{/if}}{{this.amount}}
-        </td>
-        <td style="text-align: center;">
-          <div class="d-flex flex-nowrap justify-content-center">
-            <a class="link mr-2" href="/records/{{this._id}}/edit"><i class="far fa-edit" id="edit-icon"
-                style="font-size: 1.5rem;"></i>
-            </a>
-            <form action="/records/{{this._id}}?_method=DELETE" method="post">
-              <button type="submit" class="btn btn-link m-0 p-0" style="border: none; text-decoration:none">
-                <i class="far fa-trash-alt" id="delete-icon" style="font-size: 1.5rem;">
-                </i>
-              </button>
-            </form>
-          </div>
-        </td>
-      </tr>
-      {{/each}}
-      <tr>
-        <td class="text-center" colspan="8">
-          <form action="/records/new" method="GET">
-            <button type="submit" class="btn btn-outline-warning" style="width: 200px;">Add</button>
-          </form>
-        </td>
-      </tr>
-    </tbody>
-  </table> --}}
 </div>
 
 <script src="/javascripts/icon.js"></script>

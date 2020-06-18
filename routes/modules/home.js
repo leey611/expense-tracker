@@ -5,7 +5,8 @@ const categories = ['Home', 'Transport', 'Entertainment', 'food', 'others'];
 const months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 
 router.get('/', (req, res) => {
-  Record.find()
+  const userId = req.user._id;
+  Record.find({ userId })
     .sort('_id')
     .lean()
     .then((records) => {

@@ -10,9 +10,12 @@ router.get('/new', (req, res) => {
 
 //POST create a new record
 router.post('/new', (req, res) => {
+  const userId = req.user._id;
   let { isExpense, merchant, name, date, category, amount } = req.body;
+
   isExpense = isExpense === 'Expense' ? true : false;
-  Record.create({ isExpense, merchant, name, date, category, amount })
+
+  Record.create({ isExpense, merchant, name, date, category, amount, userId })
     .then(res.redirect('/'))
     .catch((err) => console.log(err));
   //res.redirect('/');
@@ -20,8 +23,9 @@ router.post('/new', (req, res) => {
 
 //enter the edit record page
 router.get('/:id/edit', (req, res) => {
+  const userId = req.user._id;
   const _id = req.params.id;
-  Record.findOne({ _id }).then((record) => {
+  Record.findOne({ _id, userId }).then((record) => {
     const { _id, isExpense, merchant, name, date, category, amount } = record;
     const otherCategories = categories.filter((item) => item !== category);
 
@@ -40,10 +44,11 @@ router.get('/:id/edit', (req, res) => {
 
 //PUT update the record
 router.put('/:id/edit', (req, res) => {
+  const userId = req.user._id;
   const _id = req.params.id;
 
   const { isExpense, merchant, name, date, category, amount } = req.body;
-  Record.findOne({ _id })
+  Record.findOne({ _id, userId })
     .then((record) => {
       record.isExpense = isExpense === 'Expense' ? true : false;
       record.merchant = merchant;
@@ -59,8 +64,9 @@ router.put('/:id/edit', (req, res) => {
 
 //DELETE the record
 router.delete('/:id', (req, res) => {
+  const userId = req.user._id;
   const _id = req.params.id;
-  Record.findOne({ _id })
+  Record.findOne({ _id, userId })
     .then((record) => record.remove())
     .catch((err) => console.log(err));
   res.redirect('/');

@@ -15,7 +15,11 @@
     <div class="container">
       <a href="/" class="navbar-brand text-white">Expense Tracker</a>
       {{#if isAuthenticated}}
-      <a href="/users/logout" class="btn btn-light" style="border: none;  ">Logout</a>
+      <div>
+        <div style="display: inline-block;">Welcome, {{user.name}}</div>
+        <a href="/users/logout" class="btn btn-light" style="border: none;  ">Logout</a>
+      </div>
+
       {{else}}
       <div>
         <a href="/users/login" class="btn btn-light" style="border: none;  ">Login</a>

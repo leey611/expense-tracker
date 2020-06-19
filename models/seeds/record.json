@@ -1,0 +1,146 @@
+{
+  "users": [
+    {
+      "name": "test1",
+      "email": "test1@gmail.com",
+      "password": "123456",
+      "records": [
+        {
+          "name": "Breakfast",
+          "isExpense": true,
+          "merchant": "Wendy's",
+          "category": "Food",
+          "date": "2020-04-01",
+          "amount": 10
+        },
+        {
+          "name": "Lunch",
+          "isExpense": true,
+          "merchant": "Ho Foods",
+          "category": "Food",
+          "date": "2020-04-02",
+          "amount": 17
+        },
+        {
+          "name": "Dinner",
+          "isExpense": true,
+          "merchant": "KFC",
+          "category": "Food",
+          "date": "2020-04-04",
+          "amount": 15
+        },
+        {
+          "name": "Sofa",
+          "isExpense": true,
+          "merchant": "Ikea",
+          "category": "Home",
+          "date": "2020-05-03",
+          "amount": 100
+        },
+        {
+          "name": "Train",
+          "isExpense": true,
+          "merchant": "MTA",
+          "category": "Transport",
+          "date": "2020-05-10",
+          "amount": 10
+        },
+        {
+          "name": "Movie",
+          "isExpense": true,
+          "merchant": "Regal",
+          "category": "Entertainment",
+          "date": "2020-05-13",
+          "amount": 17
+        },
+        {
+          "name": "Phone bill",
+          "isExpense": true,
+          "merchant": "AT&T",
+          "category": "Others",
+          "date": "2020-05-15",
+          "amount": 40
+        },
+        {
+          "name": "Credit card payment",
+          "isExpense": true,
+          "merchant": "BOA",
+          "category": "Others",
+          "date": "2020-05-21",
+          "amount": 500
+        }
+      ]
+    },
+    {
+      "name": "test2",
+      "email": "test2@gmail.com",
+      "password": "123456",
+      "records": [
+        {
+          "name": "Breakfast",
+          "isExpense": true,
+          "merchant": "Bluestone",
+          "category": "Food",
+          "date": "2020-04-01",
+          "amount": 25
+        },
+        {
+          "name": "Lunch",
+          "isExpense": true,
+          "merchant": "Momofuku",
+          "category": "Food",
+          "date": "2020-04-02",
+          "amount": 20
+        },
+        {
+          "name": "Dinner",
+          "isExpense": true,
+          "merchant": "Popeyes",
+          "category": "Food",
+          "date": "2020-04-04",
+          "amount": 10
+        },
+        {
+          "name": "Sofa",
+          "isExpense": true,
+          "merchant": "Ikea",
+          "category": "Home",
+          "date": "2020-05-03",
+          "amount": 150
+        },
+        {
+          "name": "Subway",
+          "isExpense": true,
+          "merchant": "MTA",
+          "category": "Transport",
+          "date": "2020-05-10",
+          "amount": 32
+        },
+        {
+          "name": "Movie",
+          "isExpense": true,
+          "merchant": "AMC",
+          "category": "Entertainment",
+          "date": "2020-05-13",
+          "amount": 17
+        },
+        {
+          "name": "Phone bill",
+          "isExpense": true,
+          "merchant": "T Mobile",
+          "category": "Others",
+          "date": "2020-05-15",
+          "amount": 30
+        },
+        {
+          "name": "Credit card payment",
+          "isExpense": true,
+          "merchant": "Chase",
+          "category": "Others",
+          "date": "2020-05-21",
+          "amount": 500
+        }
+      ]
+    }
+  ]
+}

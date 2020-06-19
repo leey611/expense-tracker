@@ -1,15 +1,15 @@
 const categories = ['Home', 'Transport', 'Entertainment', 'Food', 'Others'];
 function convertIcon(category) {
   if (category === 'Home') {
-    return '<i class="fas fa-home"></i>';
+    return '<i class="fas fa-home" style="color:#457B9D"></i>';
   } else if (category === 'Transport') {
-    return '<i class="fas fa-bus"></i>';
+    return '<i class="fas fa-bus" style="color:#457B9D"></i>';
   } else if (category === 'Entertainment') {
-    return '<i class="fas fa-grin-beam"></i>';
+    return '<i class="fas fa-grin-beam" style="color:#457B9D"></i>';
   } else if (category === 'Food') {
-    return '<i class="fas fa-utensils"></i>';
+    return '<i class="fas fa-utensils" style="color:#457B9D"></i>';
   } else if (category === 'Others') {
-    return '<i class="fas fa-pen"></i>';
+    return '<i class="fas fa-pen" style="color:#457B9D"></i>';
   }
 }
 

@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap');
+* {
+  font-family: 'Jost', sans-serif;
+}
+
+html body {
+  background-color: #f1faee;
+}
+
+.myBtn {
+  border: 1px solid #264653;
+}
+.myBtn:hover {
+  opacity: 0.8;
+}
+
+.addBtn {
+  background-color: #264653;
+  color: #fff;
+}
+.addBtn:hover {
+  opacity: 0.8;
+}
+
+/* .fa {
+  color: #457b9d !important;
+} */

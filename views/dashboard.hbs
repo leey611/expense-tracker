@@ -1,0 +1,64 @@
+<div class="container mt-3 text-center">
+  <div class="text-center container" style="margin: auto; width: 600px; max-width: 100%; padding:0;">
+    <h2>
+      Expense v.s Categories
+    </h2>
+    {{!-- <div class="text-center container" style="width: 600px; max-width: 100%; padding:0"> --}}
+    <canvas id="expenseCategories"></canvas>
+    {{!-- </div> --}}
+  </div>
+  <div class="text-center container mt-3" style="margin: auto; width: 600px; max-width: 100%; padding:0;">
+    <h2>
+      Monthly Expense <span id="getYear"></span>
+    </h2>
+    {{!-- <div class="text-center container mt-3" style="width: 600px; max-width: 100%; padding:0"> --}}
+    <canvas id="annualMonthly"></canvas>
+    {{!-- </div> --}}
+  </div>
+
+</div>
+
+<div id="expenses" style="display: none;">
+  <div class="expense">{{homeEx}}</div>
+  <div class="expense">{{transportEx}}</div>
+  <div class="expense">{{entertainEx}}</div>
+  <div class="expense">{{foodEx}}</div>
+  <div class="expense">{{othersEx}}</div>
+</div>
+<div id="monthlyExpenses" style="display: none;">
+  <div class="monthlyEx">{{jan}}</div>
+  <div class="monthlyEx">{{feb}}</div>
+  <div class="monthlyEx">{{mar}}</div>
+  <div class="monthlyEx">{{apr}}</div>
+  <div class="monthlyEx">{{may}}</div>
+  <div class="monthlyEx">{{jun}}</div>
+  <div class="monthlyEx">{{jul}}</div>
+  <div class="monthlyEx">{{aug}}</div>
+  <div class="monthlyEx">{{sep}}</div>
+  <div class="monthlyEx">{{oct}}</div>
+  <div class="monthlyEx">{{nov}}</div>
+  <div class="monthlyEx">{{dec}}</div>
+
+</div>
+{{!-- <div>{{homeEx}}</div>
+<div>{{homeIn}}</div>
+<div>{{transportEx}}</div>
+<div>{{transportIn}}</div>
+<div>{{entertainEx}}</div>
+<div>{{entertainIn}}</div>
+<div>{{foodEx}}</div>
+<div>{{foodIn}}</div>
+
+<div>{{othersIn}}</div> --}}
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="/javascripts/dashboard.js"></script>
+
+
+{{!-- function getYear() {
+    const d = new Date();
+    return d.getFullYear();
+  }
+  document.getElementById('getYear').innerText = getYear(); --}}

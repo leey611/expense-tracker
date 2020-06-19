@@ -37,6 +37,7 @@ router.get('/', (req, res) => {
 
 // Filter the records according to categories or months
 router.get('/filter', (req, res) => {
+  const userId = req.user._id;
   let totalExpense = 0;
   let totalIncome = 0;
   let balanceAmount;
@@ -46,7 +47,7 @@ router.get('/filter', (req, res) => {
   }
   // if both category and months are selected, find by the category and then filter by the month
   if (req.query.category && req.query.month) {
-    Record.find({ category: req.query.category })
+    Record.find({ category: req.query.category, userId })
       .sort('_id')
       .lean()
       .then((records) => {
@@ -78,7 +79,7 @@ router.get('/filter', (req, res) => {
 
   //if only category is selected (no months), find by the category
   if (!req.query.month) {
-    Record.find({ category: req.query.category })
+    Record.find({ category: req.query.category, userId })
       .sort('_id')
       .lean()
       .then((records) => {
@@ -105,7 +106,7 @@ router.get('/filter', (req, res) => {
 
   // if only months is selected, find all first and then filter with the month
   if (!req.query.category) {
-    Record.find()
+    Record.find({ userId })
       .sort('_id')
       .lean()
       .then((records) => {
@@ -135,6 +136,86 @@ router.get('/filter', (req, res) => {
       })
       .catch((err) => console.log(err));
   }
+});
+
+//dashboard
+router.get('/dashboard', (req, res) => {
+  //console.log(req.user);
+  let homeEx = 0;
+  let transportEx = 0;
+  let entertainEx = 0;
+  let foodEx = 0;
+  let othersEx = 0;
+  let jan = 0;
+  let feb = 0;
+  let mar = 0;
+  let apr = 0;
+  let may = 0;
+  let jun = 0;
+  let jul = 0;
+  let aug = 0;
+  let sep = 0;
+  let oct = 0;
+  let nov = 0;
+  let dec = 0;
+
+  const userId = req.user._id;
+  Record.find({ userId, isExpense: true })
+    .lean()
+    .then((records) => {
+      records.map((record) => {
+        //for categories
+        homeEx +=
+          record.isExpense && record.category === 'Home' && record.amount;
+        transportEx +=
+          record.isExpense && record.category === 'Transport' && record.amount;
+        entertainEx +=
+          record.isExpense &&
+          record.category === 'Entertainment' &&
+          record.amount;
+        foodEx +=
+          record.isExpense && record.category === 'Food' && record.amount;
+        othersEx +=
+          record.isExpense && record.category === 'Others' && record.amount;
+        //for monthly
+        //check if the record is in current year
+        if (new Date(record.date).getFullYear() === new Date().getFullYear()) {
+          //console.log(new Date(record.date).getMonth() + 1 === 6);
+          jan += new Date(record.date).getMonth() + 1 === 1 && record.amount;
+          feb += new Date(record.date).getMonth() + 1 === 2 && record.amount;
+          mar += new Date(record.date).getMonth() + 1 === 3 && record.amount;
+          apr += new Date(record.date).getMonth() + 1 === 4 && record.amount;
+          may += new Date(record.date).getMonth() + 1 === 5 && record.amount;
+          jun += new Date(record.date).getMonth() + 1 === 6 && record.amount;
+          jul += new Date(record.date).getMonth() + 1 === 7 && record.amount;
+          aug += new Date(record.date).getMonth() + 1 === 8 && record.amount;
+          sep += new Date(record.date).getMonth() + 1 === 9 && record.amount;
+          oct += new Date(record.date).getMonth() + 1 === 10 && record.amount;
+          nov += new Date(record.date).getMonth() + 1 === 11 && record.amount;
+          jan += new Date(record.date).getMonth() + 1 === 12 && record.amount;
+        }
+      });
+
+      res.render('dashboard', {
+        homeEx,
+        transportEx,
+        entertainEx,
+        foodEx,
+        othersEx,
+        jan,
+        feb,
+        mar,
+        apr,
+        may,
+        jun,
+        jul,
+        aug,
+        sep,
+        oct,
+        nov,
+        dec
+      });
+    });
 });
 
 module.exports = router;

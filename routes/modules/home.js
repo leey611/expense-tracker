@@ -1,38 +1,71 @@
 const express = require('express');
 const router = express.Router();
 const Record = require('../../models/record');
+const allCategories = [
+  'Home',
+  'Transport',
+  'Entertainment',
+  'Food',
+  'Others',
+  'Salary',
+  'Gift'
+];
 const categories = ['Home', 'Transport', 'Entertainment', 'Food', 'Others'];
 const months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 
 router.get('/', (req, res) => {
   const userId = req.user._id;
-  Record.find({ userId })
-    .sort('_id')
-    .lean()
-    .then((records) => {
-      let totalExpense = 0;
-      let totalIncome = 0;
-      //map through all the expense and add them together
-      records.map(
-        (record) => (totalExpense += record.isExpense && record.amount)
-      );
-      //map through all the income and add them together
-      records.map(
-        (record) => (totalIncome += !record.isExpense && record.amount)
-      );
-      //balance
-      let balanceAmount = totalIncome - totalExpense;
-      //render home page
-      res.render('home', {
+  const totalExpense = Record.aggregate([
+    {
+      $match: {
+        userId: userId,
+        isExpense: true
+      }
+    },
+    {
+      $group: {
+        _id: null,
+        amount: { $sum: '$amount' }
+      }
+    }
+  ]).exec();
+  const totalIncome = Record.aggregate([
+    {
+      $match: {
+        userId: userId,
+        isExpense: false
+      }
+    },
+    {
+      $group: {
+        _id: null,
+        amount: { $sum: '$amount' }
+      }
+    }
+  ]).exec();
+
+  const records = Record.aggregate([
+    {
+      $match: {
+        userId: userId
+      }
+    }
+  ]).exec();
+
+  Promise.all([totalExpense, totalIncome, records])
+    .then(([totalExpense, totalIncome, records]) => {
+      const balanceAmount = totalIncome[0].amount - totalExpense[0].amount;
+
+      return res.render('home', {
         records,
-        totalExpense,
-        totalIncome,
+        totalExpense: totalExpense[0].amount,
+        totalIncome: totalIncome[0].amount,
         balanceAmount,
-        categories,
-        months
+        months,
+        categories: allCategories
       });
     })
-    .catch((err) => console.log(err));
+    .catch((error) => console.error(error));
 });
 
 // Filter the records according to categories or months

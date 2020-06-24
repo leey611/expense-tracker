@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Record = require('../../models/record');
 const categories = ['Home', 'Transport', 'Entertainment', 'Food', 'Others'];
-
+const incomeCategories = ['Salary', 'Gift', 'Others'];
 //enter the create new record page
 router.get('/new', (req, res) => {
   res.render('new', { categories });
@@ -27,7 +27,13 @@ router.get('/:id/edit', (req, res) => {
   const _id = req.params.id;
   Record.findOne({ _id, userId }).then((record) => {
     const { _id, isExpense, merchant, name, date, category, amount } = record;
-    const otherCategories = categories.filter((item) => item !== category);
+    let otherCategories;
+    if (isExpense) {
+      otherCategories = categories.filter((item) => item !== category);
+    } else {
+      otherCategories = incomeCategories.filter((item) => item !== category);
+    }
+    //const otherCategories = categories.filter((item) => item !== category);
 
     res.render('edit', {
       _id,

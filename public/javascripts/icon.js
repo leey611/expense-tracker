@@ -10,6 +10,10 @@ function convertIcon(category) {
     return '<i class="fas fa-utensils" style="color:#457B9D"></i>';
   } else if (category === 'Others') {
     return '<i class="fas fa-pen" style="color:#457B9D"></i>';
+  } else if (category === 'Salary') {
+    return '<i class="fas fa-money-bill-wave" style="color:#457B9D"></i>';
+  } else if (category === 'Gift') {
+    return '<i class="fas fa-gift" style="color:#457B9D"></i>';
   }
 }
 

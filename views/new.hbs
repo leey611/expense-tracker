@@ -10,7 +10,8 @@
         </div>
         <div class="col-auto">
           <div class="input-group">
-            <select class="form-control" id="recordCategory" name="isExpense" required>
+            <select class="form-control" id="expenseOrIncome" name="isExpense" onchange="changeExpenseOrIncome()"
+              required>
               <option value="Expense">Expense</option>
               <option value="Income">Income</option>
             </select>
@@ -86,3 +87,4 @@
       style="background-color:#264653; color: #fff; transition: opacity 0.3s">Add</button>
   </form>
 </div>
+<script src="/javascripts/categoriesChange.js"></script>

@@ -11,7 +11,8 @@
         </div>
         <div class="col-auto">
           <div class="input-group">
-            <select class="form-control" id="recordCategory" name="isExpense" required>
+            <select class="form-control" id="expenseOrIncome" name="isExpense" onchange="changeExpenseOrIncome()"
+              required>
               {{#if isExpense}}
               <option value="Expense">Expense</option>
               <option value="Income">Income</option>
@@ -91,6 +92,8 @@
     </div>
 
 
-    <button type="submit" class="btn btn-outline-primary btn-block rounded-pill align-self-center mt-3">Update</button>
+    <button type="submit" class="btn  btn-block  align-self-center mt-3 myBtn"
+      style="background-color:#264653; color: #fff; transition: opacity 0.3s">Update</button>
   </form>
 </div>
+<script src="/javascripts/categoriesChange.js"></script>
